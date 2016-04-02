@@ -444,9 +444,7 @@ Switching from DecayEnvelope to AttackDecayEnvelope requires very few changes to
 
 Both of the sample projects included with this tutorial use AttackDecayEnvelope. You can emulate DecayEnvelope by setting `attackTime` to `0` and setting `peakValue` to the same value as `startValue`.
 
-You could expand the envelope generator to add other stages<sup>*</sup> but attack and decay will be sufficient for simple percussion sounds.
-
-<sup>*</sup> See my [WebAHDSR](https://github.com/irritant/WebAHDSR) project for an example.
+You could expand the envelope generator to add other stages (see my [WebAHDSR](https://github.com/irritant/WebAHDSR) project for an example) but attack and decay will be sufficient for simple percussion sounds.
 
 # 3. Sample Project: Creating Percussion Sounds with Subtractive Synthesis
 
@@ -519,7 +517,7 @@ The preset snaore sound in `fm-percussion.js` is similar to the one in `sub-perc
 
 ### Tom-Tom & Kick
 
-The procudure for creating tom-tom and kick sounds from the snare sound is similar for both FM and subtractive sounds. See _Subtractive Sound Design Tips_.
+The procedure for creating tom-tom and kick sounds from the snare sound is similar for both FM and subtractive sounds. See _Subtractive Sound Design Tips_.
 
 ### Hi-Hats and Cymbals
 
