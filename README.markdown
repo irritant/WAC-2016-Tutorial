@@ -220,7 +220,7 @@ There are a few things to be aware of when using samples:
 
 ### Noise Recipe 3: Pseudorandom Binary Sequences with AudioBuffers
 
-A Pseudorandom Binary Sequence (PRBS) is an algorithm that creates a completely deterministic sequence of values that _creates the impression_ of being random. In practice, this approach to noise generation is similar to sampling but instead of filling the AudioBuffer with the contents of an audio file, we'll fill it with a PRBS. This has a notable advantage in that we don't have to wait for an audio file to load. See the attached paper on _Pseudorandom Binary Sequence Noise_ for details on how to generate a PRBS.
+A Pseudorandom Binary Sequence (PRBS) is an algorithm that creates a completely deterministic sequence of values that _creates the impression_ of being random. In practice, this approach to noise generation is similar to sampling but instead of filling the AudioBuffer with the contents of an audio file, we'll fill it with a PRBS. This has a notable advantage in that we don't have to wait for an audio file to load. See the attached paper on [Pseudorandom Binary Sequence Noise](PRBS-Noise.markdown) for details on how to generate a PRBS.
 
 ## 2.2 AudioParam Scheduling
 
