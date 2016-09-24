@@ -1,0 +1,40 @@
+body {
+	font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+	font-size: 14px;
+}
+
+.input-group {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	align-items: center;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.input-group > label {
+	font-size: 1em;
+}
+
+.input-group > label:not(.radio-label) {
+	width: 100px;
+	margin-right: 10px;
+}
+
+.input-group > input[type="radio"] {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.input-group > input[type="range"] {
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	flex: 1;
+}
+
+.input-group > input.value-display {
+	width: 50px;
+	margin-left: 10px;
+}
