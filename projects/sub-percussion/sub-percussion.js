@@ -48,7 +48,7 @@ window.addEventListener('load', function(e) {
 	window.voice.tone1.levelEnvelope.exponential = true;
 
 	// Tone 1 Output:
-	window.voice.tone1.output.gain.value = 0.5;
+	window.voice.tone1.output.gain.value = 0.3;
 
 	// Tone 2 Oscillator:
 	window.voice.tone2.oscillator.type = 'triangle';
@@ -79,7 +79,7 @@ window.addEventListener('load', function(e) {
 	window.voice.tone2.levelEnvelope.exponential = true;
 
 	// Tone 2 Output:
-	window.voice.tone2.output.gain.value = 0.5;
+	window.voice.tone2.output.gain.value = 0.3;
 
 	// Noise Generator:
 	window.voice.noise.generator.blockSize(1);
@@ -105,7 +105,7 @@ window.addEventListener('load', function(e) {
 	window.voice.noise.levelEnvelope.exponential = true;
 
 	// Noise Output:
-	window.voice.noise.output.gain.value = 0.5;
+	window.voice.noise.output.gain.value = 0.3;
 
 	// Configure mouse and spacebar event listeners:
 	document.getElementById('trigger').addEventListener('click', function() {
