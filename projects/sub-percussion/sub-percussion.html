@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+
+		<title>Subtractive Percussion Synthesis</title>
+
+		<link rel="stylesheet" type="text/css" href="../shared/styles.css">
+
 		<script src="../shared/ui-bindings.js"></script>
 		<script src="../shared/attack-decay.js"></script>
 		<script src="../shared/web-noise.js"></script>
@@ -17,13 +24,13 @@
 
 		<!-- Tone 1 Oscillator Type -->
 		<div class="input-group">
-			<label for="tone1.oscillator.type.sine">Sine</label>
+			<label for="tone1.oscillator.type.sine" class="radio-label">Sine</label>
 			<input type="radio" id="tone1.oscillator.type.sine" name="tone1.oscillator.type" value="sine">
-			<label for="tone1.oscillator.type.triange">Triangle</label>
+			<label for="tone1.oscillator.type.triange" class="radio-label">Triangle</label>
 			<input type="radio" id="tone1.oscillator.type.triange" name="tone1.oscillator.type" value="triangle">
-			<label for="tone1.oscillator.type.sawtooth">Sawtooth</label>
+			<label for="tone1.oscillator.type.sawtooth" class="radio-label">Sawtooth</label>
 			<input type="radio" id="tone1.oscillator.type.sawtooth" name="tone1.oscillator.type" value="sawtooth">
-			<label for="tone1.oscillator.type.square">Pulse</label>
+			<label for="tone1.oscillator.type.square" class="radio-label">Pulse</label>
 			<input type="radio" id="tone1.oscillator.type.square" name="tone1.oscillator.type" value="square">
 		</div>
 
@@ -31,17 +38,17 @@
 		<div class="input-group">
 			<label for="tone1.oscEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="tone1.oscEnvelope.decayTime" name="tone1.oscEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.oscEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="tone1.oscEnvelope.peakValue" name="tone1.oscEnvelope.peakValue" min="20" max="1000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.oscEnvelope.endValue">End Value</label>
 			<input type="range" id="tone1.oscEnvelope.endValue" name="tone1.oscEnvelope.endValue" min="20" max="1000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.oscEnvelope.exponential">Exponential</label>
@@ -52,11 +59,11 @@
 
 		<!-- Tone 1 Filter Type -->
 		<div class="input-group">
-			<label for="tone1.filter.type.lowpass">Lowpass</label>
+			<label for="tone1.filter.type.lowpass" class="radio-label">Lowpass</label>
 			<input type="radio" id="tone1.filter.type.lowpass" name="tone1.filter.type" value="lowpass">
-			<label for="tone1.filter.type.highpass">Highpass</label>
+			<label for="tone1.filter.type.highpass" class="radio-label">Highpass</label>
 			<input type="radio" id="tone1.filter.type.highpass" name="tone1.filter.type" value="highpass">
-			<label for="tone1.filter.type.bandpass">Bandpass</label>
+			<label for="tone1.filter.type.bandpass" class="radio-label">Bandpass</label>
 			<input type="radio" id="tone1.filter.type.bandpass" name="tone1.filter.type" value="bandpass">
 		</div>
 
@@ -64,24 +71,24 @@
 		<div class="input-group">
 			<label for="tone1.filter.Q">Q</label>
 			<input type="range" id="tone1.filter.Q" name="tone1.filter.Q" min="0" max="10" value="0" step="0.1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 
 		<!-- Tone 1 Filter Envelope -->
 		<div class="input-group">
 			<label for="tone1.filterEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="tone1.filterEnvelope.decayTime" name="tone1.filterEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.filterEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="tone1.filterEnvelope.peakValue" name="tone1.filterEnvelope.peakValue" min="100" max="8000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.filterEnvelope.endValue">End Value</label>
 			<input type="range" id="tone1.filterEnvelope.endValue" name="tone1.filterEnvelope.endValue" min="100" max="8000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.filterEnvelope.exponential">Exponential</label>
@@ -94,12 +101,12 @@
 		<div class="input-group">
 			<label for="tone1.levelEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="tone1.levelEnvelope.decayTime" name="tone1.levelEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.levelEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="tone1.levelEnvelope.peakValue" name="tone1.levelEnvelope.peakValue" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone1.levelEnvelope.exponential">Exponential</label>
@@ -111,13 +118,13 @@
 
 		<!-- Tone 2 Oscillator Type -->
 		<div class="input-group">
-			<label for="tone2.oscillator.type.sine">Sine</label>
+			<label for="tone2.oscillator.type.sine" class="radio-label">Sine</label>
 			<input type="radio" id="tone2.oscillator.type.sine" name="tone2.oscillator.type" value="sine">
-			<label for="tone2.oscillator.type.triange">Triangle</label>
+			<label for="tone2.oscillator.type.triange" class="radio-label">Triangle</label>
 			<input type="radio" id="tone2.oscillator.type.triange" name="tone2.oscillator.type" value="triangle">
-			<label for="tone2.oscillator.type.sawtooth">Sawtooth</label>
+			<label for="tone2.oscillator.type.sawtooth" class="radio-label">Sawtooth</label>
 			<input type="radio" id="tone2.oscillator.type.sawtooth" name="tone2.oscillator.type" value="sawtooth">
-			<label for="tone2.oscillator.type.square">Pulse</label>
+			<label for="tone2.oscillator.type.square" class="radio-label">Pulse</label>
 			<input type="radio" id="tone2.oscillator.type.square" name="tone2.oscillator.type" value="square">
 		</div>
 
@@ -125,17 +132,17 @@
 		<div class="input-group">
 			<label for="tone2.oscEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="tone2.oscEnvelope.decayTime" name="tone2.oscEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.oscEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="tone2.oscEnvelope.peakValue" name="tone2.oscEnvelope.peakValue" min="20" max="1000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.oscEnvelope.endValue">End Value</label>
 			<input type="range" id="tone2.oscEnvelope.endValue" name="tone2.oscEnvelope.endValue" min="20" max="1000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.oscEnvelope.exponential">Exponential</label>
@@ -146,11 +153,11 @@
 
 		<!-- Tone 2 Filter Type -->
 		<div class="input-group">
-			<label for="tone2.filter.type.lowpass">Lowpass</label>
+			<label for="tone2.filter.type.lowpass" class="radio-label">Lowpass</label>
 			<input type="radio" id="tone2.filter.type.lowpass" name="tone2.filter.type" value="lowpass">
-			<label for="tone2.filter.type.highpass">Highpass</label>
+			<label for="tone2.filter.type.highpass" class="radio-label">Highpass</label>
 			<input type="radio" id="tone2.filter.type.highpass" name="tone2.filter.type" value="highpass">
-			<label for="tone2.filter.type.bandpass">Bandpass</label>
+			<label for="tone2.filter.type.bandpass" class="radio-label">Bandpass</label>
 			<input type="radio" id="tone2.filter.type.bandpass" name="tone2.filter.type" value="bandpass">
 		</div>
 
@@ -158,24 +165,24 @@
 		<div class="input-group">
 			<label for="tone2.filter.Q">Q</label>
 			<input type="range" id="tone2.filter.Q" name="tone2.filter.Q" min="0" max="10" value="0" step="0.1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 
 		<!-- Tone 2 Filter Envelope -->
 		<div class="input-group">
 			<label for="tone2.filterEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="tone2.filterEnvelope.decayTime" name="tone2.filterEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.filterEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="tone2.filterEnvelope.peakValue" name="tone2.filterEnvelope.peakValue" min="100" max="8000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.filterEnvelope.endValue">End Value</label>
 			<input type="range" id="tone2.filterEnvelope.endValue" name="tone2.filterEnvelope.endValue" min="100" max="8000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.filterEnvelope.exponential">Exponential</label>
@@ -188,12 +195,12 @@
 		<div class="input-group">
 			<label for="tone2.levelEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="tone2.levelEnvelope.decayTime" name="tone2.levelEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.levelEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="tone2.levelEnvelope.peakValue" name="tone2.levelEnvelope.peakValue" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="tone2.levelEnvelope.exponential">Exponential</label>
@@ -208,18 +215,18 @@
 		<div class="input-group">
 			<label for="noise.generator.blockSize">Block Size</label>
 			<input type="range" id="noise.generator.blockSize" name="noise.generator.blockSize" min="1" max="64" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 
 		<h3>Filter</h3>
 
 		<!-- Noise Filter Type -->
 		<div class="input-group">
-			<label for="noise.filter.type.lowpass">Lowpass</label>
+			<label for="noise.filter.type.lowpass" class="radio-label">Lowpass</label>
 			<input type="radio" id="noise.filter.type.lowpass" name="noise.filter.type" value="lowpass">
-			<label for="noise.filter.type.highpass">Highpass</label>
+			<label for="noise.filter.type.highpass" class="radio-label">Highpass</label>
 			<input type="radio" id="noise.filter.type.highpass" name="noise.filter.type" value="highpass">
-			<label for="noise.filter.type.bandpass">Bandpass</label>
+			<label for="noise.filter.type.bandpass" class="radio-label">Bandpass</label>
 			<input type="radio" id="noise.filter.type.bandpass" name="noise.filter.type" value="bandpass">
 		</div>
 
@@ -227,24 +234,24 @@
 		<div class="input-group">
 			<label for="noise.filter.Q">Q</label>
 			<input type="range" id="noise.filter.Q" name="noise.filter.Q" min="0" max="10" value="0" step="0.1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 
 		<!-- Noise Filter Envelope -->
 		<div class="input-group">
 			<label for="noise.filterEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="noise.filterEnvelope.decayTime" name="noise.filterEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="noise.filterEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="noise.filterEnvelope.peakValue" name="noise.filterEnvelope.peakValue" min="100" max="8000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="noise.filterEnvelope.endValue">End Value</label>
 			<input type="range" id="noise.filterEnvelope.endValue" name="noise.filterEnvelope.endValue" min="100" max="8000" value="0" step="1">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="noise.filterEnvelope.exponential">Exponential</label>
@@ -257,12 +264,12 @@
 		<div class="input-group">
 			<label for="noise.levelEnvelope.decayTime">Decay Time</label>
 			<input type="range" id="noise.levelEnvelope.decayTime" name="noise.levelEnvelope.decayTime" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="noise.levelEnvelope.peakValue">Peak Value</label>
 			<input type="range" id="noise.levelEnvelope.peakValue" name="noise.levelEnvelope.peakValue" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 		<div class="input-group">
 			<label for="noise.levelEnvelope.exponential">Exponential</label>
@@ -275,7 +282,7 @@
 		<div class="input-group">
 			<label for="output.gain">Gain</label>
 			<input type="range" id="output.gain" name="output.gain" min="0" max="1" value="0" step="0.01">
-			<input class="value-display" type="number" value="">
+			<input class="value-display" type="number" value="" step="any">
 		</div>
 
 		<button id="trigger">Trigger (t)</button>

@@ -45,6 +45,7 @@ function UIBindings() {
 
 		element.addEventListener('input', function(e) {
 			var value = parseFloat(e.target.value);
+
 			if (typeof object[property] === 'function') {
 				object[property](value);
 			} else {
@@ -122,12 +123,12 @@ function UIBindings() {
 				}
 
 				valueElement.addEventListener('blur', function(e) {
-					e.target.value = _instance.clampValueToRangeOfInput(inputElement, parseFloat(e.target.value));
+					e.target.value = _instance.clampValueToRangeOfInput(inputElement, e.target.value);
 
 					if (typeof object[property] === 'function') {
-						object[property](e.target.value);
+						object[property](parseFloat(e.target.value));
 					} else {
-						object[property] = e.target.value;
+						object[property] = parseFloat(e.target.value);
 					}
 
 					_instance.updateInputForValueDisplay(valueElement);
@@ -170,7 +171,7 @@ function UIBindings() {
 		} else if (!isNaN(min) && value < min) {
 			return min;
 		} else {
-			return value;
+			return parseFloat(value);
 		}
 	};
 
@@ -186,7 +187,7 @@ function UIBindings() {
 	};
 
 	_instance.roundValue = function(value) {
-		return Math.round(value * 100) / 100;
+		return parseFloat(Math.round(value * 100) / 100);
 	};
 
 }
