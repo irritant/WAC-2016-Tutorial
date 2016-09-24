@@ -107,9 +107,15 @@ window.addEventListener('load', function(e) {
 	// Noise Output:
 	window.voice.noise.output.gain.value = 0.5;
 
-	// Configure mouse event listeners:
+	// Configure mouse and spacebar event listeners:
 	document.getElementById('trigger').addEventListener('click', function() {
 		window.voice.play();
+	});
+
+	document.addEventListener('keyup', function(e) {
+		if (e.which === 84) { // t key
+			window.voice.play();
+		}
 	});
 
 	configureUIBindings();

@@ -4,7 +4,7 @@ function UIBindings() {
 	_instance.bindAudioParamInput = function(selector, param) {
 		var element = document.querySelector(selector);
 		element.value = param.value;
-		element.addEventListener('change', function(e) {
+		element.addEventListener('input', function(e) {
 			param.value = e.target.value;
 		});
 	};
@@ -12,7 +12,7 @@ function UIBindings() {
 	_instance.bindGainParamInput = function(selector, param) {
 		var element = document.querySelector(selector);
 		element.value = param.value;
-		element.addEventListener('change', function(e) {
+		element.addEventListener('input', function(e) {
 			param.value = Math.pow(parseFloat(e.target.value), 0.6);
 		});
 	};
@@ -37,7 +37,7 @@ function UIBindings() {
 			element.value = object[property];
 		}
 
-		element.addEventListener('change', function(e) {
+		element.addEventListener('input', function(e) {
 			var value = parseFloat(e.target.value);
 			if (typeof object[property] === 'function') {
 				object[property](value);
@@ -50,7 +50,7 @@ function UIBindings() {
 	_instance.bindBooleanPropertyInput = function(selector, object, property) {
 		var element = document.querySelector(selector);
 		element.checked = object[property];
-		element.addEventListener('change', function(e) {
+		element.addEventListener('bindTypeParamInput', function(e) {
 			object[property] = e.target.checked;
 		});
 	};
