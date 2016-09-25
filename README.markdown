@@ -1,5 +1,5 @@
 # Introduction to Percussion Synthesis Using Web Audio
-Tony Wallace, Irritant Creative Inc.  
+Tony Wallace, Irritant Creative Inc.
 Web Audio Conference 2016, Atlanta
 
 This tutorial will introduce the basics of web audio programming by writing code to synthesize simple percussion sounds. Basic familiarity with JavaScript is assumed.
@@ -11,7 +11,7 @@ This tutorial will introduce the basics of web audio programming by writing code
 Audio systems are usually comprised of several interconnected subsystems, or nodes. The connections between nodes can be described by an _audio graph_. The audio graph for a very simple synthesizer might look something like this:
 
 ![Basic synth audio graph](images/audio-graph-1.png)
-    
+
 We can also expand the graph to include controllers and modulators:
 
 ![Complex synth audio graph](images/audio-graph-2.png)
@@ -25,12 +25,12 @@ Each audio graph is represented by an  [AudioContext](https://developer.mozilla.
 You will normally use a single AudioContext to describe your system. Creating the context is easy:
 
     var context = new AudioContext();
-    
+
 Webkit browsers require a vendor-prefixed constructor, so we can redefine AudioContext to improve support across browsers:
 
     var AudioContext = window.AudioContext || window.webkitAudioContext;
     var context = new AudioContext();
-    
+
 That will cover modern browsers, but let's show some consideration for the few people who might try to use our project with an older browser that doesn't support Web Audio:
 
     function createAudioContext() {
@@ -62,19 +62,19 @@ AudioNodes are created by calling methods on the AudioContext and connected to e
 
     // Create an AudioContext using the function we declared earlier:
     var context = createAudioContext();
-    
+
     // Request an OscillatorNode, a BiquadFilterNode, and a GainNode from the AudioContext:
     var oscillator = context.createOscillator();
     var filter = context.createBiquadFilter();
     var amplifier = context.createGain();
-    
+
     // Connect the OscillatorNode to the BiquadFilterNode, and connect the BiquadFilterNode to the GainNode:
     oscillator.connect(filter);
     filter.connect(amplifier);
-    
+
     // Connect the GainNode to the AudioContext's destination:
     amplifier.connect(context.destination);
-    
+
     // Start the OscillatorNode:
     oscillator.start();
 
@@ -87,11 +87,11 @@ The Web Audio API includes a wide variety of nodes to generate, capture and proc
 AudioParam objects provide the interface through which we control our AudioNodes. You can set the value of an AudioParam to a constant value by assigning its `value` property:
 
     oscillator.frequency.value = 440.0;
-    
+
 In the example above, `oscillator` is an OscillatorNode and `frequency` is the AudioParam that controls its frequency. Always assign to the `value` parameter, not directly to the AudioParam. The following will not work:
 
     oscillator.frequency = 440.0; // Does nothing!
-    
+
 Of course, you can also assign a variable or the return value of a function to the `value` property:
 
     var freq = 440.0;
@@ -106,41 +106,41 @@ AudioNodes are also potential control sources for AudioParams. This is a very po
 
     // Create an AudioContext using the function we declared earlier:
     var context = createAudioContext();
-    
+
     // Request two OscillatorNodes from the AudioContext, one for the signal and one for the LFO:
     var oscillator = context.createOscillator();
     oscillator.type = 'sine';
     oscillator.frequency.value = 440.0;
-    
+
     var lfo = context.createOscillator();
     lfo.type = 'sine';
     lfo.frequency.value = 440.0;
-    
+
     // Request two GainNodes from the AudioContext, one for the tremolo and one for the output attenuator:
     var tremolo = context.createGain();
-    
+
     var attenuator = context.createGain();
     attenuator.gain.value = 0.5;
-    
+
     // Connect the LFO to the tremolo's gain param:
     lfo.connect(tremolo.gain);
-    
+
     // Connect the signal oscillator to the tremolo:
     oscillator.connect(tremolo);
-    
+
     // Connect the tremolo to the attenuator:
     tremolo.connect(attenuator);
-    
+
     // Connect the attenuator to the AudioContext's destination:
     attenuator.connect(context.destination);
-    
+
     // Start the signal and LFO:
     lfo.start();
     oscillator.start();
 
 **The attenuator in the above example is important.** The LFO's amplitude swings from 0.0 (silence) to 1.0 (maximum) so the unattenuated output could be loud enough to damage your listening equipment and potentially your hearing. Always start with your headphones or speakers tuned down and gradually increase the volume to a comfortable, safe listening level.
 
-# 2. Advanced Concepts  
+# 2. Advanced Concepts
 
 ## 2.1 Noise
 
@@ -155,7 +155,7 @@ The simplest way to produce noise is via the [ScriptProcessorNode](https://devel
 
     // Request a ScriptProcessorNode with a buffer size of 256 samples, 1 input channel and 1 output channel. The number of input channels doesn't matter, but you can set the number of output channels to 2 to generate noise in stereo.
     var noise = context.createScriptProcessor(256, 1, 1);
-    
+
     // Declare the callback function that will fill the output buffer with random values:
     noise.onaudioprocess = function(evt) {
 	    // Get the output buffer:
@@ -170,11 +170,11 @@ The simplest way to produce noise is via the [ScriptProcessorNode](https://devel
 	      }
 	    }
 	  }
-	  
+
 	  // Connect the ScriptProcessorNode to a destination:
     noise.connect(context.destination);
-	  
-This approach to noise generation is simple and produces the ideal result: a continuous, aperiodic signal. It also has a significant downside: ScriptProcessorNode executes the `onaudioprocess` function _on the main thread_ and can therefore be interrupted by other actions, like JavaScript animations. It has been deprecated and will eventually be replaced by [AudioWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API#Audio_Workers). Until then, ScriptProcessorNode is still usable but only if you can guarantee that it will run uninterrupted. You should also be prepared to replace any ScriptProcessorNode-based features as browser vendors may evenutally drop support for it. 
+
+This approach to noise generation is simple and produces the ideal result: a continuous, aperiodic signal. It also has a significant downside: ScriptProcessorNode executes the `onaudioprocess` function _on the main thread_ and can therefore be interrupted by other actions, like JavaScript animations. It has been deprecated and will eventually be replaced by [AudioWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API#Audio_Workers). Until then, ScriptProcessorNode is still usable but only if you can guarantee that it will run uninterrupted. You should also be prepared to replace any ScriptProcessorNode-based features as browser vendors may evenutally drop support for it.
 
 ### Noise Recipe 2: Sampling with AudioBuffers
 
@@ -186,25 +186,25 @@ Once you have a sample, you can load it into an [AudioBuffer](https://developer.
     var request = new XMLHttpRequest();
     request.open('GET', 'noise.wav', true);
     request.responseType = "arraybuffer";
-    
+
     // Assign a function to be executed when the sample has loaded:
     request.onload = function() {
       // Create an AudioContext using the function we declared earlier:
       var context = createAudioContext();
-      
+
       // Request an AudioBuffer filled with the sample data from the response:
       var buffer = context.createBuffer(request.response, false);
-    	
+
       // Request an AudioBufferSourceNode and assign the AudioBuffer to it:
       var source = context.createBufferSource();
       source.buffer = buffer;
-      
+
       // Uncomment to enable looping:
       // source.loop = true;
-      
+
       // Connect the AudioBufferSourceNode to a destination:
       source.connect(context.destination);
-      
+
       // Start playback:
       source.start();
     };
@@ -228,28 +228,28 @@ A percussion sound will typically be short but very dynamic, with many character
 
     // Create an AudioContext using the function we declared earlier:
     var context = createAudioContext();
-    
+
     // Request and configure an OscillatorNode:
     var oscillator = context.createOscillator();
     oscillator.type = 'sine';
     oscillator.frequency.value = 440.0;
-    
+
     // Request and configure a GainNode:
     var amplifier = context.createGain();
     amplifier.gain.value = 1.0;
-    
+
     // Connect the OscillatorNode to the GainNode:
     oscillator.connect(amplifier);
-    
+
     // Connect the GainNode to the AudioContext's destination:
     amplifier.connect(context.destination);
-    
+
     // Start the OscillatorNode:
     oscillator.start();
-    
+
     // Set the end time to two seconds from the current time provided by the AudioContext:
     var endTime = context.currentTime + 2.0;
-    
+
     // Ramp the GainNode's gain value to zero:
     amplifier.gain.linearRampToValueAtTime(0.0, endTime);
 
@@ -257,13 +257,13 @@ We can produce a smoother, more natural sounding decay by substituting `exponent
 
     // Set the initial value:
     amplifier.gain.value = 1.0;
-    
+
     // Set the end time to two seconds from the current time provided by the AudioContext:
     var endTime = context.currentTime + 2.0;
 
     // Ramp exponentially to a very small value, slightly before the desired time:
     amplifier.gain.exponentialRampToValueAtTime(0.001, endTime - 0.01);
-    
+
     // Ramp linearly to zero at the desired time:
     amplifier.gain.linearRampToValueAtTime(0.0, endTime);
 
@@ -271,16 +271,16 @@ If you are increasing the value over time, reverse the order of the ramps:
 
     // Set the initial value:
     amplifier.gain.value = 0.0;
-    
+
     // Set the start time to a very short distance in the future"
     var startTime = context.currentTime + 0.01;
-    
+
     // Set the end time to two seconds from the current time provided by the AudioContext:
     var endTime = context.currentTime + 2.0;
-    
+
     // Ramp linearly to a very small value:
     amplifier.gain.linearRampToValueAtTime(0.0, startTime);
-    
+
     // Ramp exponentially to the end value:
     amplifier.gain.exponentialRampToValueAtTime(1.0, endTime);
 
@@ -292,7 +292,7 @@ We can improve upon the scheduling methods demonstrated above by encapsulating t
       var _env = this;
 
       _env.param = param;
-      
+
       // Set default values:
 	    _env.decayTime = 1.0;
 	    _env.startValue = 1.0;
@@ -303,7 +303,7 @@ We can improve upon the scheduling methods demonstrated above by encapsulating t
 	    _env.play = function() {
 		    var startTime = context.currentTime;
 		    var endTime = startTime + _env.decayTime;
-		    
+
 		    // Cancel any previously scheduled values and ramp immediately to the start value. This will ensure that the envelope generator always resets to the correct start value:
 		    _env.param.cancelScheduledValues(startTime);
 		    _env.param.linearRampToValueAtTime(_env.startValue, startTime);
@@ -322,33 +322,33 @@ We can improve upon the scheduling methods demonstrated above by encapsulating t
 		      _env.param.linearRampToValueAtTime(_env.endValue, endTime);
 		    }
 	    };
-	    
+
     }
 
 The DecayEnvelope constructor accepts the current AudioContext and an AudioParam as arguments. You can use it to control any AudioParam. Let's modify our previous example to use DecayEnvelope instead of the manual scheduling code:
 
     // Create an AudioContext using the function we declared earlier:
     var context = createAudioContext();
-    
+
     // Request and configure an OscillatorNode:
     var oscillator = context.createOscillator();
     oscillator.type = 'sine';
     oscillator.frequency.value = 440.0;
-    
+
     // Request and configure a GainNode:
     var amplifier = context.createGain();
     amplifier.gain.value = 1.0;
-    
+
     // Configure a DecayEnvelope to control the GainNode:
     var envelope = new DecayEnvelope(context, amplifier.gain);
     envelope.decayTime = 2.0;
-    
+
     // Connect the OscillatorNode to the GainNode:
     oscillator.connect(amplifier);
-    
+
     // Connect the GainNode to the AudioContext's destination:
     amplifier.connect(context.destination);
-    
+
     // Start the OscillatorNode and DecayEnvelope:
     oscillator.start();
     envelope.play();
@@ -362,7 +362,7 @@ The DecayEnvelope is useful but you might notice an annoying clicking sound when
 
     function AttackDecayEnvelope(context, param) {
 	    var _env = this;
-	    
+
 	    _env.param = param;
 
       // Set default values:
@@ -378,7 +378,7 @@ The DecayEnvelope is useful but you might notice an annoying clicking sound when
 		    var startTime = context.currentTime;
 		    var peakTime = startTime + _env.attackTime;
 		    var endTime = peakTime + _env.decayTime;
-		    
+
 		    // Cancel any previously scheduled values and ramp immediately to the start value. This will ensure that the envelope generator always resets to the correct start value:
 		    _env.param.cancelScheduledValues(startTime);
 		    _env.param.linearRampToValueAtTime(_env.startValue, startTime);
@@ -395,7 +395,7 @@ The DecayEnvelope is useful but you might notice an annoying clicking sound when
 			     } else {
 			      _env.param.exponentialRampToValueAtTime(_env.peakValue, peakTime);
 			     }
-			    
+
 			    // Schedule an exponential decay:
 			    if (_env.endValue == 0.0) {
 			      _env.param.exponentialRampToValueAtTime(0.001, endTime - 0.001);
@@ -417,27 +417,27 @@ Switching from DecayEnvelope to AttackDecayEnvelope requires very few changes to
 
     // Create an AudioContext using the function we declared earlier:
     var context = createAudioContext();
-    
+
     // Request and configure an OscillatorNode:
     var oscillator = context.createOscillator();
     oscillator.type = 'sine';
     oscillator.frequency.value = 440.0;
-    
+
     // Request and configure a GainNode:
     var amplifier = context.createGain();
     amplifier.gain.value = 1.0;
-    
+
     // Configure an AttackDecayEnvelope to control the GainNode:
     var envelope = new AttackDecayEnvelope(context, amplifier.gain);
     envelope.attackTime = 0.1;
     envelope.decayTime = 2.0;
-    
+
     // Connect the OscillatorNode to the GainNode:
     oscillator.connect(amplifier);
-    
+
     // Connect the GainNode to the AudioContext's destination:
     amplifier.connect(context.destination);
-    
+
     // Start the OscillatorNode and DecayEnvelope:
     oscillator.start();
     envelope.play();
@@ -466,7 +466,7 @@ The `sub-percussion` project includes the following files:
 * `web-noise.js`: A ScriptProcessorNode-based noise generator.
 * `sub-percussion-tone.js`: The prototype for the tone channels.
 * `sub-percussion-noise.js`: The prototype for the noise channels.
-* `sub-percussion.js`: The main implementation file, which instantiates a voice and configures a basic snare drum sound. 
+* `sub-percussion.js`: The main implementation file, which instantiates a voice and configures a basic snare drum sound.
 
 Spend some time playing with the properties in `sub-percussion.js` to design your own sounds. Make note of any settings that you particularly like.
 
@@ -509,7 +509,7 @@ The character of an FM sound is determined largely by the relationship between t
 
 The `tone1` and `tone2` components have envelope generators for both modulator and carrier frequency. You'll get more predictable results if you maintain a constant ratio between the modulator and carrier. For example, if you want a 3:2 ratio and your carrier frequency starts at 400 Hz, decaying exponentially to 200 Hz over 0.5 seconds, your modulator should start at 600 Hz and decay exponentially to 300 Hz over the same period. This is not a rule and you should feel free to experiment with different envelope settings for the modulator and carrier, but the results of doing so can be very hard to predict.
 
-The `tone1` and `tone2` components also have envelope generators for the modulation depth. Varying modulation depth can be a great way to dynamically change the harmonic complexity of your sounds. In general, use a higher value (~1000+) for the `startValue` and `peakValue` properties and a lower value for the `endValue` property. 
+The `tone1` and `tone2` components also have envelope generators for the modulation depth. Varying modulation depth can be a great way to dynamically change the harmonic complexity of your sounds. In general, use a higher value (~1000+) for the `startValue` and `peakValue` properties and a lower value for the `endValue` property.
 
 ### Snare
 
@@ -528,3 +528,8 @@ FM does a better job of synthesizing metallic sounds like hi-hats and cymbals th
 The [Mozilla Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) documentation does an excellent job of documenting the current state of the API.
 
 Simon Cann's book [How to Make a Noise: Frequency Modulation Synthesis](http://noisesculpture.com/how-to-make-a-noise-frequency-modulation-synthesis/) offers a great primer on FM synthesis.
+
+# Revision History
+
+* 04/2016: Initial version for presentation at WAC2016, Atlanta
+* 09/2016: Added UI to projects for presentation at Soundhackers, Toronto
